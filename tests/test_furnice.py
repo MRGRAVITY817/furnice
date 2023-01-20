@@ -1,3 +1,6 @@
+from furnice.model import Batch, OrderLine
+from datetime import date
+
 def test_allocating_to_a_batch_reduces_the_available_quantity():
     # Arrange
     batch = Batch("batch-001", "SMALL-TABLE", qty=20, eta=date.today())
