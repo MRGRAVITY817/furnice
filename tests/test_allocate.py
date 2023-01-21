@@ -1,4 +1,4 @@
-from furnice.model import Batch, OrderLine, allocate
+from furnice.model import Batch, OrderLine, allocate, OutOfStock
 from datetime import date, timedelta
 import pytest
 
