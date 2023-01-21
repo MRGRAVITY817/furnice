@@ -40,3 +40,10 @@ def test_cannot_allocate_if_skus_do_not_match():
     # Assert with Act
     assert batch.can_allocate(different_sku_line) is False
 
+def test_can_only_deallocate_allocated_lines():
+    #Arrange
+    batch, unallocated_line = make_batch_and_line("Trinket", 20, 2)
+    # Act
+    batch,deallocate(unallocated_line)
+    # Assert
+    assert batch.available_quantity == 20
