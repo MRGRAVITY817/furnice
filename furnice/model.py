@@ -57,5 +57,5 @@ def allocate(line: OrderLine, batches: List[Batch]) -> str:
 	# Should prefer the batch with less eta
 	batch = next(b for b in sorted(batches) if b.can_allocate(line))
 	batch.allocate(line)
-	return batch
+	return batch.reference
 
