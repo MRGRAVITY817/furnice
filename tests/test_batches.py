@@ -41,9 +41,18 @@ def test_cannot_allocate_if_skus_do_not_match():
     assert batch.can_allocate(different_sku_line) is False
 
 def test_can_only_deallocate_allocated_lines():
-    #Arrange
+    # Arrange
     batch, unallocated_line = make_batch_and_line("Trinket", 20, 2)
     # Act
     batch.deallocate(unallocated_line)
     # Assert
     assert batch.available_quantity == 20
+
+def test_allocations_is_idempotent():
+    # Arrange
+    batch, line = make_batch_and_line("Desk", 20, 2)
+    # Act
+    batch.allocate(line)
+    batch.allocate(line)
+    # Assert
+    assert batch.available_quantity == 18
