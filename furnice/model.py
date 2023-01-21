@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from datetime import date
-from typing import Optional
+from typing import Optional, List
 
 # OrderLine is Value Object, so it should be immutable.
 @dataclass(frozen=True)
@@ -40,6 +40,22 @@ class Batch:
 		if not isinstance(other, Batch):
 			return False
 		return other.reference == self.reference
+	
+	def __gt__(self, other) -> bool:
+		if self.eta is None:
+			return False
+		if other.eta is None:
+			return True
+		return self.eta > other.eta
+
 
 	def __hash__(self) -> int:
 		return hash(self.reference)
+
+
+def allocate(line: OrderLine, batches: List[Batch]) -> str:
+	# Should prefer the batch with less eta
+	batch = next(b for b in sorted(batches) if b.can_allocate(line))
+	batch.allocate(line)
+	return batch
+

@@ -1,4 +1,4 @@
-from furnice.model import Batch, OrderLine
+from furnice.model import Batch, OrderLine, allocate
 from datetime import date, timedelta
 
 today = date.today()
