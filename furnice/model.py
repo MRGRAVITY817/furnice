@@ -59,3 +59,4 @@ def allocate(line: OrderLine, batches: List[Batch]) -> str:
 	batch.allocate(line)
 	return batch.reference
 
+
